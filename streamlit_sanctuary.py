@@ -8,7 +8,7 @@ load_dotenv()
 
 
 def get_response(question, personality):
-    openai.api_key = os.getenv("OPENAI_API_KEY")
+    openai.api_key = st.secrets["OPENAI_API_KEY"]
     response = openai.Completion.create(
         engine="text-davinci-003",
         prompt="Answer the question: {} as if you were {}".format(question, personality),
@@ -65,7 +65,7 @@ def main():
             st.image(url)
     with art:
         st.header("Art")
-        personality = st.selectbox("Choose your art mind", [ "Leonardo da Vinci", "Michelangelo", "Raphael", "Pablo Picasso", "Vincent van Gogh", "Claude Monet", "Edgar Degas","Other"])
+        personality = st.selectbox("Choose your art mind", ["Leonardo da Vinci", "Michelangelo", "Raphael", "Pablo Picasso", "Vincent van Gogh", "Claude Monet", "Edgar Degas","Other"])
         if personality == "Other":
             personality = st.text_input("Enter your music mind", value="eg: Raphael", max_chars=None, key=None, type='default')
         question = st.text_input('''Ask your question 🪶''', value="eg: Who was your biggest inspiration?", max_chars=None, key=None, type='default')
